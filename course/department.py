@@ -4,4 +4,4 @@ class Department(Enum):
     COMPUTER_SCIENCE = auto()
     EDUCATION = auto()
     ENGINEERING = auto()
-    MEDICINCE = auto()
+    MEDICINE = auto()
