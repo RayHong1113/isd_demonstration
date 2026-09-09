@@ -1,3 +1,8 @@
+""""This module define the course class"""
+
+__author__ ="ACE Faculty"
+__version__ ="1.0.0"
+
 from course.department import Department
 
 class Course():
