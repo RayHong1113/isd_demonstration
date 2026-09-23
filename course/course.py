@@ -9,7 +9,7 @@ from course.student import Student
 
 
 class Course(ABC):
-    """Represenents a course at a post secondary institution"""
+    """Represents a course at a post secondary institution"""
 
     ENROLLMENT_LIMIT = 30
     """The maximum number of students enrolled in course""" 
@@ -20,19 +20,30 @@ class Course(ABC):
             department: Department,
             credit_hours: int): 
         """Represents a course at an education institution"""
+
         self.__students = []
+
+        """Initializes the new instance of the course class.
+        
+            Args:
+                name (str) : the name of the course
+                department (Department) : The department that the course comes from
+                credit_hours (int) : number of credit hours
+
+            Raises:
+                ValueError : Raised when incorrect args are provided
+        """
 
         if len(name.strip()) == 0:
             raise ValueError("name cannot be an empty string")
 
-        # if isinstance(credit_hours, int):
-        #     if credit_hours <= 0:
-        #         raise ValueError("credit_hours must be a value greater than zero")
-           
-                 
-        self.credit_hours = credit_hours # call the setter directly
+        if isinstance(credit_hours, int):
+            if credit_hours <= 0:
+                raise ValueError("credit_hours must be a value greater than zero")
+            else:
+                self.credit_hours = credit_hours # call the setter directly
 
-        self.__name = name 
+        self.__name = name.strip() 
         self.__department = department
        
 
