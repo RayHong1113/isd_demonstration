@@ -6,10 +6,10 @@ Example:
 
 import unittest
 
-from department.department import Department
+from course.department import Department
 from course.course import Course
 from course.lecture_course import LectureCourse
-from student.student import Student
+from course.student import Student
 
 __author__ = "ACE Faculty <mbialowas@rrc.ca>"
 __version__ = "1.0.0"
