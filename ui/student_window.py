@@ -27,15 +27,7 @@ class StudentWindow(MainWindow):
 
     def __initialize_widgets(self) -> None:
         """Init the widgets in the window"""
-        # student = self.__students[self.__current_index]
-
-        # self._student_number_label.setText(str(student.student_number))
-        # self._name_label.setText(student.name)
-
-        # self._grade_label.setText(str(student.get_grade_point_average()))
-        # self._item_count_label.setText(f"{self.__current_index + 1} of " 
-        #                                 f"{len(self.__students)}")
-
+        
         # handle navigation buttons
         self._first_button.clicked.connect(self.__on_first_button_clicked)
         self._previous_button.clicked.connect(self.__on_previous_button_clicked)
@@ -54,7 +46,6 @@ class StudentWindow(MainWindow):
 
         student = self.__students[self.__current_index]
 
-        student = self.__students[self.__current_index]
         
         self._student_number_label.setText(str(student.student_number))
         self._name_label.setText(student.name)
@@ -67,7 +58,22 @@ class StudentWindow(MainWindow):
     def __on_edit_button_clicked(self) -> None:
         """Handles the event for edit button"""
         dialog = StudentGradeDialog(self.__students[self.__current_index])
+
+        dialog.grade_updated.connect(self.__on_grade_updated)
         dialog.exec() # opens the dialog
+
+
+    def __on_grade_updated(self, grade: Decimal)-> None:
+        """
+            Handle the grade_updated event of the dialog window
+
+            args:
+                grade( Decimal) : the updated grade
+
+        """
+        student = self.__students[self.__current_index]
+        student.set_grade_point_average(grade)
+        self.__update_user_interface()
 
     @Slot()
     def __on_first_button_clicked(self) -> None:
