@@ -5,6 +5,9 @@ from decimal import Decimal
 from student.student import Student
 from student.college_student import CollegeStudent
 from patterns.singleton.student_number_generator import StudentNumberGenerator
+from student.volunteer_decorator import VolunteerDecorator
+from student.student_council_decorator import StudentCouncilDecorator
+
 
 __author__ = "COMP-2327 Faculty"
 __version__ = "1.0.0"
@@ -36,19 +39,35 @@ def get_students() -> list[Student]:
 def main():
     """The main entry point of the program."""
 
-    generator = StudentNumberGenerator()
-    print(type(generator))
-    print(id(generator))
+    # generator = StudentNumberGenerator()
+    # print(type(generator))
+    # print(id(generator))
 
-    donkey = StudentNumberGenerator()
-    print(type(donkey))
-    print(id(donkey))
+    # donkey = StudentNumberGenerator()
+    # print(type(donkey))
+    # print(id(donkey))
 
     students = get_students()
     
-    for student in students:
-        # Student numbers are unique
-        print(f"{student}")
+    # for student in students:
+    #     # Student numbers are unique
+    #     print(f"{student}")
+
+
+    student = students[0]
+    print(student.get_grade_point_average())
+
+    # decorate the student as a volunteer
+    volunteer_student = VolunteerDecorator(student)
+    print(volunteer_student.get_grade_point_average())
+
+    # decorate the volunteer(student) as council member
+    council_student = StudentCouncilDecorator(volunteer_student)
+    print(council_student.get_grade_point_average())
+
+    student = CollegeStudent("Eric Best", Decimal('4.4'))
+    student = VolunteerDecorator(student)
+    print(student.get_grade_point_average())
 
 if __name__ == "__main__":
     main()

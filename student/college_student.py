@@ -38,7 +38,7 @@ class CollegeStudent:
             raise ValueError("grade_point_average must be a Decimal "
                              "value between 0 and 4.5 (inclusive)")
 
-        self.__student_number = StudentNumberGenerator.get_next_student_number
+        self.__student_number = StudentNumberGenerator.get_instance().get_next_student_number()
         self.__name = name.strip()
         self.__grade_point_average = grade_point_average
         

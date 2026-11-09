@@ -35,6 +35,6 @@ class StudentNumberGenerator:
             int: the next available unique student
             number
         """
-        next_student_number = self.get_next_student_number
-        self.__next_student_number += 1
-        return next
+        next_student_number = self.__next_student_number
+        self.__next_student_number +=1
+        return next_student_number
