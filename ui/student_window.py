@@ -3,6 +3,7 @@ from PySide6.QtCore import Slot
 from student.college_student import CollegeStudent
 
 from ui.base.main_window import MainWindow
+from ui.student_grade_dialog import StudentGradeDialog
 from decimal import Decimal
 
 
@@ -41,6 +42,9 @@ class StudentWindow(MainWindow):
         self._next_button.clicked.connect(self.__on_next_button_clicked)
         self._last_button.clicked.connect(self.__on_last_button_clicked)
 
+        # edit button
+        self._edit_button.clicked.connect(self.__on_edit_button_clicked)
+
         self.__update_user_interface()
 
         
@@ -58,29 +62,12 @@ class StudentWindow(MainWindow):
         self._grade_label.setText(str(student.get_grade_point_average()))
         self._item_count_label.setText(f"{self.__current_index + 1} of " 
                                                 f"{len(self.__students)}")
-    
-    # @Slot()
-    # def __on_first_button_clicked(self) -> None:
-    #     """Handles the clicked event of 1st button"""
-    #     self.__current_index = 0 
-    #     self.__initialize_widgets()  
 
-    # @Slot()
-    # def __on_previous_button_clicked(self) -> None:
-    #     """Handle the clicked event for the previous button"""
-    #     if self.__current_index != 0:
-    #         self.__current_index -= 1
-    #         self.__initialize_widgets()  
-
-    # Slot()
-    # def __on_next_button_clicked(self) -> None:
-    #     """Handles the next button clicked event"""
-    #     if self.__current_index != len(self.__students) - 1:
-    #         self.__current_index += 1
-
-    #         self.__initialize_widgets()
-
-    #region "Event handlers"
+    @Slot()
+    def __on_edit_button_clicked(self) -> None:
+        """Handles the event for edit button"""
+        dialog = StudentGradeDialog(self.__students[self.__current_index])
+        dialog.exec() # opens the dialog
 
     @Slot()
     def __on_first_button_clicked(self) -> None:
